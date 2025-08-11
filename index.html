@@ -1,0 +1,43 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>플라스틱 제로 챌린지</title>
+</head>
+<body>
+  <h1>플라스틱 제로 챌린지</h1>
+
+  <form id="createUserForm">
+    <input type="text" name="username" placeholder="사용자 이름">
+    <button type="submit">사용자 생성</button>
+  </form>
+
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="text" name="user_id" placeholder="사용자 ID">
+    <input type="text" name="action" placeholder="미션 이름">
+    <input type="file" name="image">
+    <button type="submit">미션 인증</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('createUserForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const res = await fetch('/create_user', { method: 'POST', body: formData });
+      const data = await res.json();
+      alert('사용자 생성됨: ID ' + data.user_id);
+    };
+
+    document.getElementById('uploadForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const res = await fetch('/upload', { method: 'POST', body: formData });
+      const data = await res.json();
+      document.getElementById('result').innerText =
+        `분류 결과: ${data.result}, 절감량: ${data.grams}g, 포인트: ${data.points}`;
+    };
+  </script>
+</body>
+</html>
