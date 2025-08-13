@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>기록 화면</title>
+  <style>
+    body { font-family: sans-serif; background-color: #fffaf0; padding: 20px; }
+    h1 { color: #8B4513; }
+    label { display: block; margin-top: 10px; }
+    input, select, button { margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>📸 플라스틱 절감 행동 인증</h1>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <label>사용자 ID:</label>
+    <input type="text" name="user_id" required>
+
+    <label>행동 유형:</label>
+    <select name="action">
+      <option value="tumbler">텀블러 사용</option>
+      <option value="bag">장바구니 사용</option>
+      <option value="straw">다회용 빨대</option>
+    </select>
+
+    <label>사진 업로드:</label>
+    <input type="file" name="image" accept="image/*" required>
+
+    <button type="submit">기록하기</button>
+  </form>
+</body>
+</html>
