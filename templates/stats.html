@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>통계 화면</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: sans-serif; background-color: #f0f8ff; padding: 20px; }
+    h1 { color: #1E90FF; }
+  </style>
+</head>
+<body>
+  <h1>📊 절감량 통계</h1>
+  <canvas id="statsChart" width="400" height="200"></canvas>
+
+  <script>
+    fetch('/user_stats')
+      .then(res => res.json())
+      .then(data => {
+        new Chart(document.getElementById('statsChart'), {
+          type: 'bar',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: '플라스틱 절감량(g)',
+              data: data.values,
+              backgroundColor: 'green'
+            }]
+          }
+        });
+      });
+  </script>
+</body>
+</html>

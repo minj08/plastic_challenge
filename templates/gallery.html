@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>업로드 이미지 목록</title>
+  <style>
+    body { font-family: sans-serif; background-color: #f9f9f9; padding: 20px; }
+    h1 { color: #333; }
+    .gallery { display: flex; flex-wrap: wrap; gap: 10px; }
+    .gallery img { width: 200px; height: auto; border: 1px solid #ccc; padding: 5px; background: white; }
+  </style>
+</head>
+<body>
+  <h1>🖼️ 인증 이미지 갤러리</h1>
+  <div class="gallery">
+    {% for filename in images %}
+      <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="인증 이미지">
+    {% endfor %}
+  </div>
+</body>
+</html>
