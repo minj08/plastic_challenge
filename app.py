@@ -5,6 +5,19 @@ import os
 import sqlite3
 from model import classify_image
 
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -62,3 +75,18 @@ def get_user(user_id):
     user = c.fetchone()
     conn.close()
     return jsonify({'username': user[0], 'points': user[1]})
+
+@app.route('/')
+def home():
+    return '''
+    <h1>🌱 플라스틱 제로 챌린지</h1>
+    <p>API 서버가 정상적으로 실행 중입니다.</p>
+    <ul>
+        <li><a href="/user/1">사용자 정보 보기</a></li>
+        <li>POST /create_user</li>
+        <li>POST /upload</li>
+    </ul>
+    '''
+
+if __name__ == '__main__':
+    app.run(debug=True)
